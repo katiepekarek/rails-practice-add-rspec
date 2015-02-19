@@ -24,9 +24,10 @@ class EventsController < ApplicationController
       :capacity,
       :requires_id
     )
-    @event = Event.new(event_params)
-    @event.save
+    event = Event.new(event_params)
+    if event.save
     redirect_to events_path
+    end
   end
 
   def update
@@ -41,11 +42,14 @@ class EventsController < ApplicationController
     @event.update(event_params)
     redirect_to events_path
   end
-  
+
   def destroy
-    @event = Event.find(params[:iid])
-    @event.destroy(event_params)
+    event = Event.find(params[:id])
+    if event.destroy
+
     redirect_to events_path
+    end
   end
+
 
 end
